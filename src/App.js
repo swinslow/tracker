@@ -23,7 +23,7 @@ class App extends Component {
 
     this.state = {
       startDate: 7,
-      endDate: 15,
+      endDate: 25,
       manual: {
         7: {
           "calm": [4, 3]
@@ -34,13 +34,15 @@ class App extends Component {
       },
       dates: {}
     }
+
+    this.dates = {}
   }
 
   componentDidMount() {
     this.resetDatesWithManual()
 
 //    this.clearManualValue(9, "blade");
-//    this.setManualValue(15, "blade", 14, 3);
+    this.setManualValue(15, "blade", 14, 3);
   }
 
   resetDatesWithManual() {
@@ -63,10 +65,11 @@ class App extends Component {
       dates[d] = newDate;
     }
 
-    // set the state with the copied dates
-    // and wait till it's done to update the subsequent
-    // date values
-    this.setState({dates: dates}, this.updateValues);
+    // update the subsequent date values
+    // don't call setState here, we'll do it later after we
+    // update all the values
+    this.dates = dates;
+    this.updateValues();
   }
 
   getDayRows() {
@@ -209,6 +212,11 @@ class App extends Component {
         newValue = Math.floor(tVal[0] / 2);
         newDecay = 3;
       }
+      // if our trait value is now 0, decay should also
+      // be 0 so we stop recounting
+      if (newValue === 0) {
+        newDecay = 0;
+      }
       datesObj[intDate] = {
         ...datesObj[intDate],
         [trait]: [newValue, newDecay, false]
@@ -225,7 +233,7 @@ class App extends Component {
     // also note the min and max date as we proceed
     let minDate = 999999;
     let maxDate = 0;
-    const intDates = Object.keys(this.state.dates);
+    const intDates = Object.keys(this.dates);
     for (let i = 0; i < intDates.length; i++) {
       let d = intDates[i];
       if (d < minDate) {
@@ -235,10 +243,10 @@ class App extends Component {
         maxDate = d;
       }
       let newDate = {};
-      const traits = Object.keys(this.state.dates[d]);
+      const traits = Object.keys(this.dates[d]);
       for (let j = 0; j < traits.length; j++) {
         let trait = traits[j];
-        let traitVals = this.state.dates[d][trait]
+        let traitVals = this.dates[d][trait]
         newDate[trait] = [traitVals[0], traitVals[1], traitVals[2]];
       }
 
@@ -263,7 +271,8 @@ class App extends Component {
     }
 
     // finally, at the end, set the state!
-    this.setState({dates: dates});
+    this.dates = dates;
+    this.setState({dates: this.dates});
   }
 
   render() {
