@@ -40,7 +40,7 @@ class App extends Component {
     this.resetDatesWithManual()
 
 //    this.clearManualValue(9, "blade");
-    this.setManualValue(15, "blade", 14, 3);
+//    this.setManualValue(15, "blade", 14, 3);
   }
 
   resetDatesWithManual() {
@@ -64,10 +64,9 @@ class App extends Component {
     }
 
     // set the state with the copied dates
-    this.setState({dates: dates});
-
-    // and now update the subsequent date values
-    this.updateValues();
+    // and wait till it's done to update the subsequent
+    // date values
+    this.setState({dates: dates}, this.updateValues);
   }
 
   getDayRows() {
@@ -188,6 +187,9 @@ class App extends Component {
     // now, decide how to set today's trait values based
     // on yesterday's value and decay
     let newDecay = tVal[1] - 1;
+    if (newDecay < 0) {
+      newDecay = 0;
+    }
     if (newDecay > 0) {
       // we haven't decayed, so use the same trait value
       // and just decrement the decay
@@ -205,6 +207,7 @@ class App extends Component {
         newDecay = 7;
       } else {
         newValue = Math.floor(tVal[0] / 2);
+        newDecay = 3;
       }
       datesObj[intDate] = {
         ...datesObj[intDate],
@@ -242,6 +245,8 @@ class App extends Component {
       // newDate's traits are now filled in; add to new object
       dates[d] = newDate;
     }
+
+    console.log(dates);
 
     // okay, now the local dates object is a copy, so we don't
     // have to worry about waiting for setState calls to
