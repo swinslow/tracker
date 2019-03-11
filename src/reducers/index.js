@@ -10,9 +10,7 @@ const startState = {
 
 function rootReducer(state = startState, action) {
     if (action.type === SET_MANUAL) {
-        let newManual = {};
-
-        Object.assign({}, newManual, {
+        let newManual = Object.assign({}, {
             ...state.manual,
             [action.intDate]: {
                 ...state.manual[action.intDate],
@@ -29,11 +27,10 @@ function rootReducer(state = startState, action) {
     }
 
     if (action.type === CLEAR_MANUAL) {
-        let newManual = {};
         let revisedDate = state.manual[action.intDate]
         delete revisedDate[action.trait];
 
-        Object.assign({}, newManual, {
+        let newManual = Object.assign({}, {
             ...state.manual,
             [action.intDate]: revisedDate
         });
