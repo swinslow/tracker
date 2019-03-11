@@ -1,24 +1,16 @@
 import React from 'react'
 import { Table } from 'semantic-ui-react';
+import ManualMarker from './manualMarker';
 
-function formatTraits(traits) {
-    if (!traits) {
-        return 0;
-    }
-    
-    var s = traits[0] + ' (' + traits[1];
+function checkMarker(traits) {
     if (traits[2] === true) {
-        s += ', M)';
-    } else {
-        s += ')';
+        return <ManualMarker />
     }
-
-    return s;
 }
 
 function DayCell(props) {
     return (
-        <Table.Cell>{formatTraits(props.traitVals)}</Table.Cell>
+        <Table.Cell textAlign="center">{props.traitVals[0]} {checkMarker(props.traitVals)}</Table.Cell>
     )
 }
 

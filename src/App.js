@@ -42,22 +42,26 @@ class App extends Component {
       intDate: 9,
       trait: "blade"
     })
-//     this.resetDatesWithManual()
-
-// //    this.clearManualValue(9, "blade");
-//     this.setManualValue(15, "blade", 14, 3);
   }
 
   render() {
     return (
       <div className="App">
         <h2>Dates</h2>
-        <Table celled>
+        <Table celled striped>
           <Table.Header>
             <Table.Row>
-              <Table.HeaderCell>Date</Table.HeaderCell>
-              <Table.HeaderCell>Blade</Table.HeaderCell>
-              <Table.HeaderCell>Calm</Table.HeaderCell>
+              <Table.HeaderCell textAlign="center">Date</Table.HeaderCell>
+              <Table.HeaderCell textAlign="center">Blade</Table.HeaderCell>
+              <Table.HeaderCell textAlign="center">Calm</Table.HeaderCell>
+              <Table.HeaderCell textAlign="center">Chaos</Table.HeaderCell>
+              <Table.HeaderCell textAlign="center">Death</Table.HeaderCell>
+              <Table.HeaderCell textAlign="center">Eye</Table.HeaderCell>
+              <Table.HeaderCell textAlign="center">Fascination</Table.HeaderCell>
+              <Table.HeaderCell textAlign="center">Hunger</Table.HeaderCell>
+              <Table.HeaderCell textAlign="center">Key</Table.HeaderCell>
+              <Table.HeaderCell textAlign="center">Life</Table.HeaderCell>
+              <Table.HeaderCell textAlign="center">Prime</Table.HeaderCell>
             </Table.Row>
           </Table.Header>
           <Table.Body>

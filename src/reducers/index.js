@@ -119,17 +119,22 @@ function updateValueForTraitOnDate(datesObj, intDate, trait) {
         // reset the decay to what it should be, each
         // depending on the trait
         let newValue;
-        if (trait === "fascination") {
-            newValue = tVal[0] - 1;
-            newDecay = 7;
-        } else {
-            newValue = Math.floor(tVal[0] / 2);
-            newDecay = 3;
-        }
-        // if our trait value is now 0, decay should also
-        // be 0 so we stop recounting
-        if (newValue === 0) {
+        if (tVal[0] === 0) {
+            newValue = 0;
             newDecay = 0;
+        } else {
+            if (trait === "fascination") {
+                newValue = tVal[0] - 1;
+                newDecay = 7;
+            } else {
+                newValue = Math.floor(tVal[0] / 2);
+                newDecay = 3;
+            }
+            // if our trait value is now 0, decay should also
+            // be 0 so we stop recounting
+            if (newValue === 0) {
+                newDecay = 0;
+            }
         }
         datesObj[intDate] = {
             ...datesObj[intDate],
