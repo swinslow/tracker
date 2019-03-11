@@ -9,6 +9,7 @@ const startState = {
 };
 
 function rootReducer(state = startState, action) {
+    console.log("action: type: " + action.type);
     if (action.type === SET_MANUAL) {
         let newManual = Object.assign({}, {
             ...state.manual,
@@ -27,6 +28,7 @@ function rootReducer(state = startState, action) {
     }
 
     if (action.type === CLEAR_MANUAL) {
+        console.log("in CLEAR_MANUAL, intDate: " + action.intDate + ", trait: " + action.trait);
         let revisedDate = state.manual[action.intDate]
         delete revisedDate[action.trait];
 
