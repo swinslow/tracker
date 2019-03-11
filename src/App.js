@@ -48,7 +48,7 @@ class App extends Component {
     return (
       <div className="App">
         <h2>Dates</h2>
-        <Table celled striped>
+        <Table celled striped compact="very">
           <Table.Header>
             <Table.Row>
               <Table.HeaderCell textAlign="center">Date</Table.HeaderCell>
