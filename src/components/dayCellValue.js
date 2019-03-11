@@ -26,7 +26,6 @@ class ConnectedDayCellValue extends Component {
     handleClick(event) {
         event.preventDefault()
         if (this.state.editing === false) {
-            console.log("Clicked on "+ this.props.trait + ", date " + this.props.intDate)
             this.setState({
                 editing: true,
                 editContents: this.props.traitVals[0].toString()
@@ -52,8 +51,6 @@ class ConnectedDayCellValue extends Component {
         if (Number.isNaN(newValue) || newValue < 0) {
             newValue = 0;
         }
-
-        console.log("Submitting manual value: " + this.props.trait + ", value " + newValue + ", date " + this.props.intDate)
 
         // figure out correct decay value
         let newDecay;

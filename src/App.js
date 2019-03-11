@@ -8,40 +8,27 @@ class App extends Component {
 
 
   componentDidMount() {
-    const manualSet = {
-      9: {
-          "blade": [8, 3]
-      },
-      11: {
-          "calm": [12, 3]
-      }
-    }
+    let manualSet = JSON.parse(window.localStorage.getItem("manual"))
     this.props.store.dispatch({
       type: "LOAD_MANUAL",
       manualSet
     })
 
-    this.props.store.dispatch({
-      type: "SET_MANUAL",
-      intDate: 11,
-      trait: "blade",
-      newValue: 4,
-      newDecay: 3
-    })
+    // this.props.store.dispatch({
+    //   type: "SET_MANUAL",
+    //   intDate: 11,
+    //   trait: "blade",
+    //   newValue: 4,
+    //   newDecay: 3
+    // })
 
-    this.props.store.dispatch({
-      type: "SET_MANUAL",
-      intDate: 7,
-      trait: "blade",
-      newValue: 17,
-      newDecay: 3
-    })
-
-    this.props.store.dispatch({
-      type: "CLEAR_MANUAL",
-      intDate: 9,
-      trait: "blade"
-    })
+    // this.props.store.dispatch({
+    //   type: "SET_MANUAL",
+    //   intDate: 7,
+    //   trait: "blade",
+    //   newValue: 17,
+    //   newDecay: 3
+    // })
   }
 
   render() {

@@ -12,7 +12,7 @@ class DayCell extends Component {
 
     render() {
         return (
-            <Table.Cell selectable onClick={this.handleClick} textAlign="center">
+            <Table.Cell textAlign="center">
                 <DayCellValue intDate={this.props.intDate} trait={this.props.trait} traitVals={this.props.traitVals} />&nbsp;
                 {this.checkMarker()}
             </Table.Cell>

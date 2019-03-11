@@ -17,7 +17,6 @@ class ConnectedManualMarker extends Component {
 
     handleClick(event) {
         event.preventDefault();
-        console.log("calling clearManual: " + this.props.intDate + ", " + this.props.trait);
         this.props.clearManual(this.props.intDate, this.props.trait);
     }
 
