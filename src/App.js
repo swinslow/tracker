@@ -21,8 +21,8 @@ class App extends Component {
       this.props.store.dispatch({
         type: "LOAD_MANUAL",
         manualSet: {},
-        startDate: 124,
-        endDate: 153
+        startDate: 123,
+        endDate: 152
       })
     }
   }
