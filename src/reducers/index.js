@@ -21,7 +21,7 @@ function rootReducer(state = startState, action) {
         let newDates = recalculateDates(newManual, state.startDate, state.endDate);
 
         // update local storage
-        saveToLocalStorage(newManual);
+        saveToLocalStorage(newManual, state.startDate, state.endDate);
 
         return Object.assign({}, state, {
             manual: newManual,
@@ -41,7 +41,7 @@ function rootReducer(state = startState, action) {
         let newDates = recalculateDates(newManual, state.startDate, state.endDate);
 
         // update local storage
-        saveToLocalStorage(newManual);
+        saveToLocalStorage(newManual, state.startDate, state.endDate);
 
         return Object.assign({}, state, {
             manual: newManual,
@@ -52,14 +52,16 @@ function rootReducer(state = startState, action) {
     if (action.type === LOAD_MANUAL) {
         let newManual = Object.assign({}, action.manualSet);
 
-        let newDates = recalculateDates(newManual, state.startDate, state.endDate);
+        let newDates = recalculateDates(newManual, action.startDate, action.endDate);
 
         // DO NOT update local storage; we should only use this for
         // loading from existing local storage
 
         return Object.assign({}, state, {
             manual: newManual,
-            dates: newDates
+            dates: newDates,
+            startDate: action.startDate,
+            endDate: action.endDate
         });
     }
 
@@ -73,6 +75,9 @@ function rootReducer(state = startState, action) {
         }
 
         let newDates = recalculateDates(state.manual, newStartDate, state.endDate);
+
+        // update local storage
+        saveToLocalStorage(state.manual, newStartDate, state.endDate);
 
         return Object.assign({}, state, {
             startDate: newStartDate,
@@ -91,6 +96,9 @@ function rootReducer(state = startState, action) {
 
         let newDates = recalculateDates(state.manual, state.startDate, newEndDate);
 
+        // update local storage
+        saveToLocalStorage(state.manual, state.startDate, newEndDate);
+
         return Object.assign({}, state, {
             endDate: newEndDate,
             dates: newDates
@@ -100,8 +108,13 @@ function rootReducer(state = startState, action) {
     return state;
 }
 
-function saveToLocalStorage(manual) {
-    window.localStorage.setItem("manual", JSON.stringify(manual))
+function saveToLocalStorage(manual, startDate, endDate) {
+    let saveState = {
+        manual,
+        startDate,
+        endDate
+    }
+    window.localStorage.setItem("saveState", JSON.stringify(saveState))
 }
 
 // updates a single trait for a single day within a local

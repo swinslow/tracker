@@ -8,13 +8,23 @@ import EndDateButtons from './components/endDateButtons';
 
 class App extends Component {
 
-
   componentDidMount() {
-    let manualSet = JSON.parse(window.localStorage.getItem("manual"))
-    this.props.store.dispatch({
-      type: "LOAD_MANUAL",
-      manualSet
-    })
+    let saveState = JSON.parse(window.localStorage.getItem("saveState"))
+    if (saveState) {
+      this.props.store.dispatch({
+        type: "LOAD_MANUAL",
+        manualSet: saveState["manual"],
+        startDate: saveState["startDate"],
+        endDate: saveState["endDate"]
+      })
+    } else {
+      this.props.store.dispatch({
+        type: "LOAD_MANUAL",
+        manualSet: {},
+        startDate: 1,
+        endDate: 10
+      })
+    }
   }
 
   render() {

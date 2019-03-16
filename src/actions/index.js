@@ -14,9 +14,11 @@ export const clearManual = (intDate, trait) => ({
     trait: trait
 })
 
-export const loadManual = (manualSet) => ({
+export const loadManual = (manualSet, startDate, endDate) => ({
     type: LOAD_MANUAL,
-    manualSet: manualSet
+    manualSet: manualSet,
+    startDate: startDate,
+    endDate: endDate
 })
 
 export const adjustStartDate = (delta) => ({
