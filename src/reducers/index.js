@@ -46,6 +46,11 @@ function rootReducer(state = startState, action) {
             [action.intDate]: revisedDate
         });
 
+        // also eliminate this manual entry if it is now empty
+        if (Object.entries(revisedDate).length === 0) {
+            delete newManual[action.intDate];
+        }
+
         let newDates = recalculateDates(newManual, state.startDate, state.endDate);
 
         // update local storage
