@@ -1,11 +1,12 @@
 import React from 'react'
 import { Table } from 'semantic-ui-react';
 import DayCell from './dayCell.js';
+import { getCalendarStringFromIntDate } from '../utils/calendar';
 
 function DayRow(props) {
     return (
         <Table.Row>
-            <Table.Cell>{props.intDate}</Table.Cell>
+            <Table.Cell singleLine>{getCalendarStringFromIntDate(props.intDate)}</Table.Cell>
             <DayCell intDate={props.intDate} trait="blade" traitVals={props.traits["blade"]} />
             <DayCell intDate={props.intDate} trait="calm" traitVals={props.traits["calm"]} />
             <DayCell intDate={props.intDate} trait="chaos" traitVals={props.traits["chaos"]} />

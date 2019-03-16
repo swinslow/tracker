@@ -21,8 +21,8 @@ class App extends Component {
       this.props.store.dispatch({
         type: "LOAD_MANUAL",
         manualSet: {},
-        startDate: 1,
-        endDate: 10
+        startDate: 124,
+        endDate: 153
       })
     }
   }
@@ -30,13 +30,13 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <h2>Tehai Trait Tracker</h2>
+        <h2>Influence Tracker</h2>
         <StartDateButtons />
         <EndDateButtons />
-        <Table fixed celled striped compact="very">
+        <Table celled fixed striped definition compact="very">
           <Table.Header>
             <Table.Row>
-              <Table.HeaderCell textAlign="center">Date</Table.HeaderCell>
+              <Table.HeaderCell width='three' textAlign="center">Date</Table.HeaderCell>
               <Table.HeaderCell textAlign="center">Blade</Table.HeaderCell>
               <Table.HeaderCell textAlign="center">Calm</Table.HeaderCell>
               <Table.HeaderCell textAlign="center">Chaos</Table.HeaderCell>
