@@ -46,7 +46,8 @@ class App extends Component {
               <Table.HeaderCell textAlign="center">Key</Table.HeaderCell>
               <Table.HeaderCell textAlign="center">Life</Table.HeaderCell>
               <Table.HeaderCell textAlign="center">Prime</Table.HeaderCell>
-              <Table.HeaderCell textAlign="center">Fascination</Table.HeaderCell>
+              <Table.HeaderCell color="red" textAlign="center">Fascination</Table.HeaderCell>
+              <Table.HeaderCell textAlign="center">Change</Table.HeaderCell>
             </Table.Row>
           </Table.Header>
           <Table.Body>

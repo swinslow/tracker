@@ -13,9 +13,9 @@ export function getCalendarStringFromIntDate(intDate) {
     let intMonth = 0;
     for (iter = intDate; iter >= 0;) {
         // check the number of days in the current month,
-        // adjusting for leap day if needed
+        // adjusting for leap day if needed (Grumayen 27 => 28)
         let numDays = MONTHS[intMonth].days
-        if (intMonth === 1 && (year % 4) === 0) {
+        if (intMonth === 6 && (year % 4) === 0) {
             numDays += 1
         }
 

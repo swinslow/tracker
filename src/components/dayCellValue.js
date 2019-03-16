@@ -58,6 +58,8 @@ class ConnectedDayCellValue extends Component {
             newDecay = 0;
         } else if (this.props.trait === "fascination") {
             newDecay = 7;
+        } else if (this.props.trait === "change") {
+            newDecay = 0;
         } else {
             newDecay = 3;
         }

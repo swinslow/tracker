@@ -17,6 +17,7 @@ function DayRow(props) {
             <DayCell intDate={props.intDate} trait="life" traitVals={props.traits["life"]} />
             <DayCell intDate={props.intDate} trait="prime" traitVals={props.traits["prime"]} />
             <DayCell intDate={props.intDate} trait="fascination" traitVals={props.traits["fascination"]} />
+            <DayCell intDate={props.intDate} trait="change" traitVals={props.traits["change"]} />
         </Table.Row>
     )
 }

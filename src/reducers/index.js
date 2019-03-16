@@ -182,7 +182,13 @@ function updateValueForTraitOnDate(datesObj, intDate, trait) {
     if (newDecay < 0) {
         newDecay = 0;
     }
-    if (newDecay > 0) {
+    if (trait === "change") {
+        // don't do anything, change never decays
+        datesObj[intDate] = {
+            ...datesObj[intDate],
+            [trait]: [tVal[0], 0, false]
+        };
+    } else if (newDecay > 0) {
         // we haven't decayed, so use the same trait value
         // and just decrement the decay
         datesObj[intDate] = {

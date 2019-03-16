@@ -4,9 +4,10 @@ export const TRAITS = [
     "chaos",
     "death",
     "eye",
-    "fascination",
     "hunger",
     "key",
     "life",
     "prime",
+    "fascination",
+    "change"
 ]
