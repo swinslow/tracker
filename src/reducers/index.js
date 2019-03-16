@@ -10,11 +10,19 @@ const startState = {
 
 function rootReducer(state = startState, action) {
     if (action.type === SET_MANUAL) {
+        let newValue = action.newValue
+
+        // if trying to set to an odd number, AND it isn't fascination,
+        // we'll force it to round down
+        if (action.trait !== "fascination" && newValue % 2 === 1) {
+            newValue = newValue - 1;
+        }
+
         let newManual = Object.assign({}, {
             ...state.manual,
             [action.intDate]: {
                 ...state.manual[action.intDate],
-                [action.trait]: [action.newValue, action.newDecay]
+                [action.trait]: [newValue, action.newDecay]
             }
         });
 
@@ -195,6 +203,10 @@ function updateValueForTraitOnDate(datesObj, intDate, trait) {
                 newDecay = 7;
             } else {
                 newValue = Math.floor(tVal[0] / 2);
+                // if it's an odd number, round down
+                if (newValue % 2 === 1) {
+                    newValue = newValue - 1;
+                }
                 newDecay = 3;
             }
             // if our trait value is now 0, decay should also

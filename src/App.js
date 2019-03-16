@@ -30,7 +30,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <h2>Dates</h2>
+        <h2>Tehai Trait Tracker</h2>
         <StartDateButtons />
         <EndDateButtons />
         <Table fixed celled striped compact="very">
