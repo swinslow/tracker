@@ -1,4 +1,4 @@
-import { SET_MANUAL, CLEAR_MANUAL, LOAD_MANUAL } from "../constants/action-types";
+import { SET_MANUAL, CLEAR_MANUAL, LOAD_MANUAL, ADJUST_START_DATE, ADJUST_END_DATE } from "../constants/action-types";
 import { TRAITS } from "../constants/traits";
 
 const startState = {
@@ -63,6 +63,34 @@ function rootReducer(state = startState, action) {
         });
     }
 
+    if (action.type === ADJUST_START_DATE) {
+        let newStartDate = state.startDate + action.delta
+        if (newStartDate < 0) {
+            newStartDate = 0;
+        }
+        if (newStartDate > state.endDate) {
+            newStartDate = state.endDate - 1;
+        }
+
+        return Object.assign({}, state, {
+            startDate: newStartDate
+        })
+    }
+
+    if (action.type === ADJUST_END_DATE) {
+        let newEndDate = state.endDate + action.delta
+        if (newEndDate < 0) {
+            newEndDate = 0;
+        }
+        if (newEndDate > state.startDate) {
+            newEndDate = state.startDate + 1;
+        }
+
+        return Object.assign({}, state, {
+            endDate: newEndDate
+        })
+    }
+
     return state;
 }
 
@@ -96,10 +124,17 @@ function updateValueForTraitOnDate(datesObj, intDate, trait) {
     let dYest = datesObj[intDate - 1]
     if (!dYest) {
         // not found, record 0 here and bail
-        datesObj[intDate] = {
-            ...datesObj[intDate],
-            [trait]: [0, 0, false]
-        };
+        if (!(datesObj[intDate])) {
+            // also don't have anything for today, so make a new one
+            datesObj[intDate] = {
+                [trait]: [0, 0, false]
+            };
+        } else {
+            datesObj[intDate] = {
+                ...datesObj[intDate],
+                [trait]: [0, 0, false]
+            };
+        }
         return;
     }
 

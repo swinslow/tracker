@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import 'semantic-ui-css/semantic.min.css';
 import { Table } from 'semantic-ui-react';
 import './App.css';
-import DayRows from './components/dayRows.js';
+import DayRows from './components/dayRows';
+import StartDateButtons from './components/startDateButtons';
 
 class App extends Component {
 
@@ -35,6 +36,7 @@ class App extends Component {
     return (
       <div className="App">
         <h2>Dates</h2>
+        <StartDateButtons />
         <Table fixed celled striped compact="very">
           <Table.Header>
             <Table.Row>
@@ -44,11 +46,11 @@ class App extends Component {
               <Table.HeaderCell textAlign="center">Chaos</Table.HeaderCell>
               <Table.HeaderCell textAlign="center">Death</Table.HeaderCell>
               <Table.HeaderCell textAlign="center">Eye</Table.HeaderCell>
-              <Table.HeaderCell textAlign="center">Fascination</Table.HeaderCell>
               <Table.HeaderCell textAlign="center">Hunger</Table.HeaderCell>
               <Table.HeaderCell textAlign="center">Key</Table.HeaderCell>
               <Table.HeaderCell textAlign="center">Life</Table.HeaderCell>
               <Table.HeaderCell textAlign="center">Prime</Table.HeaderCell>
+              <Table.HeaderCell textAlign="center">Fascination</Table.HeaderCell>
             </Table.Row>
           </Table.Header>
           <Table.Body>

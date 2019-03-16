@@ -1,4 +1,4 @@
-import { SET_MANUAL, CLEAR_MANUAL, LOAD_MANUAL } from "../constants/action-types";
+import { SET_MANUAL, CLEAR_MANUAL, LOAD_MANUAL, ADJUST_START_DATE, ADJUST_END_DATE } from "../constants/action-types";
 
 export const setManual = (intDate, trait, newValue, newDecay) => ({
     type: SET_MANUAL,
@@ -17,4 +17,14 @@ export const clearManual = (intDate, trait) => ({
 export const loadManual = (manualSet) => ({
     type: LOAD_MANUAL,
     manualSet: manualSet
+})
+
+export const adjustStartDate = (delta) => ({
+    type: ADJUST_START_DATE,
+    delta: delta
+})
+
+export const adjustEndDate = (delta) => ({
+    type: ADJUST_END_DATE,
+    delta: delta
 })

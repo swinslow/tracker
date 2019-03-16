@@ -1,3 +1,5 @@
 export const SET_MANUAL = "SET_MANUAL";
 export const CLEAR_MANUAL = "CLEAR_MANUAL";
 export const LOAD_MANUAL = "LOAD_MANUAL";
+export const ADJUST_START_DATE = "ADJUST_START_DATE";
+export const ADJUST_END_DATE = "ADJUST_END_DATE";
