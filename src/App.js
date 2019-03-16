@@ -4,6 +4,7 @@ import { Table } from 'semantic-ui-react';
 import './App.css';
 import DayRows from './components/dayRows';
 import StartDateButtons from './components/startDateButtons';
+import EndDateButtons from './components/endDateButtons';
 
 class App extends Component {
 
@@ -14,22 +15,6 @@ class App extends Component {
       type: "LOAD_MANUAL",
       manualSet
     })
-
-    // this.props.store.dispatch({
-    //   type: "SET_MANUAL",
-    //   intDate: 11,
-    //   trait: "blade",
-    //   newValue: 4,
-    //   newDecay: 3
-    // })
-
-    // this.props.store.dispatch({
-    //   type: "SET_MANUAL",
-    //   intDate: 7,
-    //   trait: "blade",
-    //   newValue: 17,
-    //   newDecay: 3
-    // })
   }
 
   render() {
@@ -37,6 +22,7 @@ class App extends Component {
       <div className="App">
         <h2>Dates</h2>
         <StartDateButtons />
+        <EndDateButtons />
         <Table fixed celled striped compact="very">
           <Table.Header>
             <Table.Row>

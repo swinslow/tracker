@@ -72,8 +72,11 @@ function rootReducer(state = startState, action) {
             newStartDate = state.endDate - 1;
         }
 
+        let newDates = recalculateDates(state.manual, newStartDate, state.endDate);
+
         return Object.assign({}, state, {
-            startDate: newStartDate
+            startDate: newStartDate,
+            dates: newDates
         })
     }
 
@@ -82,12 +85,15 @@ function rootReducer(state = startState, action) {
         if (newEndDate < 0) {
             newEndDate = 0;
         }
-        if (newEndDate > state.startDate) {
+        if (newEndDate < state.startDate) {
             newEndDate = state.startDate + 1;
         }
 
+        let newDates = recalculateDates(state.manual, state.startDate, newEndDate);
+
         return Object.assign({}, state, {
-            endDate: newEndDate
+            endDate: newEndDate,
+            dates: newDates
         })
     }
 
@@ -201,7 +207,7 @@ function recalculateDates(newManual, startDate, endDate) {
     let maxDate = 0;
     const manualIntDates = Object.keys(newManual);
     for (let i = 0; i < manualIntDates.length; i++) {
-        let d = manualIntDates[i];
+        let d = parseInt(manualIntDates[i], 10);
         if (d < minDate) {
             minDate = d;
         }
@@ -223,7 +229,9 @@ function recalculateDates(newManual, startDate, endDate) {
     // we should be able to walk through in order, starting with
     // the earliest date and continuing until the requested
     // end date.
-    for (let iter = startDate; iter <= endDate; iter++) {
+    let firstDateRow = Math.min(minDate, startDate)
+    let lastDateRow = Math.max(maxDate, endDate)
+    for (let iter = firstDateRow; iter <= lastDateRow; iter++) {
         for (let t = 0; t < TRAITS.length; t++) {
             updateValueForTraitOnDate(dates, iter, TRAITS[t]);
         }
