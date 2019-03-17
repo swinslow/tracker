@@ -15,14 +15,16 @@ class App extends Component {
         type: "LOAD_MANUAL",
         manualSet: saveState["manual"],
         startDate: saveState["startDate"],
-        endDate: saveState["endDate"]
+        endDate: saveState["endDate"],
+        selectedDate: saveState["selectedDate"]
       })
     } else {
       this.props.store.dispatch({
         type: "LOAD_MANUAL",
         manualSet: {},
         startDate: 123,
-        endDate: 152
+        endDate: 152,
+        selectedDate: -1
       })
     }
   }
@@ -54,6 +56,8 @@ class App extends Component {
             <DayRows />
           </Table.Body>
         </Table>
+        <hr />
+        <h6>Licensed under <a href="https://blueoakcouncil.org/license/1.0.0">the Blue Oak Model License, version 1.0.0</a>.</h6>
       </div>
     );
   }

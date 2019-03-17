@@ -6,11 +6,12 @@ const mapStateToProps = state => {
     return {
         startDate: state.startDate,
         endDate: state.endDate,
-        dates: state.dates
+        dates: state.dates,
+        selectedDate: state.selectedDate
     };
 }
 
-function getDayRows(dates, startDate, endDate) {
+function getDayRows(dates, startDate, endDate, selectedDate) {
     let dayRows = [];
 
     const rows = Object.keys(dates).map(key =>
@@ -19,9 +20,10 @@ function getDayRows(dates, startDate, endDate) {
 
     rows.forEach(function (row) {
         let intDate = row[0];
+        let intDateAsInt = parseInt(intDate, 10)
         if (intDate >= startDate && intDate <= endDate) {
             const dr = (
-                <DayRow key={intDate} intDate={intDate} traits={row[1]}></DayRow>
+                <DayRow key={intDate} intDate={intDate} traits={row[1]} isSelectedDate={intDateAsInt === selectedDate}></DayRow>
             );
             dayRows.push(dr);
         }
@@ -30,8 +32,8 @@ function getDayRows(dates, startDate, endDate) {
     return dayRows
 }
 
-const ConnectedDayRows = ({ dates, startDate, endDate }) => (
-    getDayRows(dates, startDate, endDate)
+const ConnectedDayRows = ({ dates, startDate, endDate, selectedDate }) => (
+    getDayRows(dates, startDate, endDate, selectedDate)
 )
 
 const DayRows = connect(mapStateToProps)(ConnectedDayRows);

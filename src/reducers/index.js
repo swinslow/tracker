@@ -1,11 +1,12 @@
-import { SET_MANUAL, CLEAR_MANUAL, LOAD_MANUAL, ADJUST_START_DATE, ADJUST_END_DATE } from "../constants/action-types";
+import { SET_MANUAL, CLEAR_MANUAL, LOAD_MANUAL, ADJUST_START_DATE, ADJUST_END_DATE, SET_SELECTED_DATE, CLEAR_SELECTED_DATE } from "../constants/action-types";
 import { TRAITS } from "../constants/traits";
 
 const startState = {
     startDate: 7,
     endDate: 25,
     manual: {},
-    dates: {}
+    dates: {},
+    selectedDate: -1
 };
 
 function rootReducer(state = startState, action) {
@@ -29,7 +30,7 @@ function rootReducer(state = startState, action) {
         let newDates = recalculateDates(newManual, state.startDate, state.endDate);
 
         // update local storage
-        saveToLocalStorage(newManual, state.startDate, state.endDate);
+        saveToLocalStorage(newManual, state.startDate, state.endDate, state.selectedDate);
 
         return Object.assign({}, state, {
             manual: newManual,
@@ -54,7 +55,7 @@ function rootReducer(state = startState, action) {
         let newDates = recalculateDates(newManual, state.startDate, state.endDate);
 
         // update local storage
-        saveToLocalStorage(newManual, state.startDate, state.endDate);
+        saveToLocalStorage(newManual, state.startDate, state.endDate, state.selectedDate);
 
         return Object.assign({}, state, {
             manual: newManual,
@@ -74,7 +75,8 @@ function rootReducer(state = startState, action) {
             manual: newManual,
             dates: newDates,
             startDate: action.startDate,
-            endDate: action.endDate
+            endDate: action.endDate,
+            selectedDate: action.selectedDate
         });
     }
 
@@ -90,7 +92,7 @@ function rootReducer(state = startState, action) {
         let newDates = recalculateDates(state.manual, newStartDate, state.endDate);
 
         // update local storage
-        saveToLocalStorage(state.manual, newStartDate, state.endDate);
+        saveToLocalStorage(state.manual, newStartDate, state.endDate, state.selectedDate);
 
         return Object.assign({}, state, {
             startDate: newStartDate,
@@ -110,7 +112,7 @@ function rootReducer(state = startState, action) {
         let newDates = recalculateDates(state.manual, state.startDate, newEndDate);
 
         // update local storage
-        saveToLocalStorage(state.manual, state.startDate, newEndDate);
+        saveToLocalStorage(state.manual, state.startDate, newEndDate, state.selectedDate);
 
         return Object.assign({}, state, {
             endDate: newEndDate,
@@ -118,14 +120,39 @@ function rootReducer(state = startState, action) {
         })
     }
 
+    if (action.type === SET_SELECTED_DATE) {
+        // make sure value is a valid int
+        let newSelectedDate = parseInt(action.intDate, 10)
+        if (isNaN(newSelectedDate) || newSelectedDate < 0) {
+            newSelectedDate = -1
+        }
+
+        // update local storage
+        saveToLocalStorage(state.manual, state.startDate, state.endDate, newSelectedDate);
+
+        return Object.assign({}, state, {
+            selectedDate: newSelectedDate
+        })
+    }
+
+    if (action.type === CLEAR_SELECTED_DATE) {
+        // update local storage
+        saveToLocalStorage(state.manual, state.startDate, state.endDate, -1);
+
+        return Object.assign({}, state, {
+            selectedDate: -1
+        })
+    }
+
     return state;
 }
 
-function saveToLocalStorage(manual, startDate, endDate) {
+function saveToLocalStorage(manual, startDate, endDate, selectedDate) {
     let saveState = {
         manual,
         startDate,
-        endDate
+        endDate,
+        selectedDate
     }
     window.localStorage.setItem("saveState", JSON.stringify(saveState))
 }
